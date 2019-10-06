@@ -1,0 +1,19 @@
+# Comples Systems Theory and Practice
+
+This is a Repository for storing files for my University Course.
+
+## Setting up the environment
+
+If you would like to reuse and play with
+this project, here are the steps to correctly
+setup new environment.
+
+1. Make sure that you're using ``python3``.
+1. Fork this repository and/or clone it:
+`git clone https://github.com/Squaess/ComplexSystemT-P.git`
+1. Create new virtual environment: `python -m venv venv`
+1. Activate the environment:
+    * On Windows: `.\venv\Scripts\activate`
+    * On Linux/Mac: `source ./venv/bin/activate`
+1. Install packages from ``requirements.txt`` file:
+`pip install -r requirements.txt`
