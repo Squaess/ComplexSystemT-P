@@ -2,3 +2,11 @@ pylint
 plotly
 networkx
 ipython
+numpy
+requests
+beautifulsoup4
+jupyterlab
+pandas
+matplotlib
+nltk
+scipy

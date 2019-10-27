@@ -8,7 +8,7 @@ If you would like to reuse and play with
 this project, here are the steps to correctly
 setup new environment.
 
-1. Make sure that you're using ``python3``.
+1. Make sure that you're using ``python3`` in a ``64`` bit version.
 1. Fork this repository and/or clone it:
 `git clone https://github.com/Squaess/ComplexSystemT-P.git`
 1. Create new virtual environment: `python -m venv venv`
