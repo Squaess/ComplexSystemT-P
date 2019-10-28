@@ -1,20 +1,27 @@
 import plotly.graph_objects as go
 import networkx as nx
+import os
 
 # create graph from file which is in gml format
 g = nx.readwrite.gml.read_gml("data/dolphins/dolphins.gml")
 
 # generate x and y position for all nodes
+# this is needed for drawing
 pos = nx.fruchterman_reingold_layout(g)
 
+# vertex postions
 Xv = [pos[k][0] for k in g.nodes()]
 Yv = [pos[k][1] for k in g.nodes()]
+
+# Edges prositions in format: 
+# [start, end, None, start2, end2, None, ...]
 Xed = []
 Yed = []
 for edge in g.edges():
     Xed+=[pos[edge[0]][0],pos[edge[1]][0], None]
     Yed+=[pos[edge[0]][1],pos[edge[1]][1], None]
 
+# edge trace
 edge_trace=go.Scatter(
     x=Xed,
     y=Yed,
@@ -23,6 +30,7 @@ edge_trace=go.Scatter(
     hoverinfo='none'
 )
 
+# node trace
 node_trace=go.Scatter(
     x=Xv,
     y=Yv,
@@ -44,7 +52,12 @@ node_trace=go.Scatter(
     ),
 )
 
+# list of degrees
+# for each node
 node_adjacencies = []
+
+# container for the hover text 
+# for each node
 node_text = []
 for node, adjacencies in enumerate(g.adjacency()):
     node_adjacencies.append(len(adjacencies[1]))
@@ -55,9 +68,12 @@ for node, adjacencies in enumerate(g.adjacency()):
         )
     )
 
+# make color propotional to the
+# node degree
 node_trace.marker.color=node_adjacencies
 node_trace.text = node_text
 
+# Figure objec: this will be displayd
 fig = go.Figure(
     data=[edge_trace, node_trace],
     layout=go.Layout(
@@ -76,3 +92,10 @@ fig = go.Figure(
     )
 )
 fig.show()
+
+# save file in case of not working browser
+node_trace.mode="markers+text"
+if not os.path.exists("results"):
+    os.mkdir("results")
+
+fig.write_image("results/exc1.png")

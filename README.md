@@ -17,3 +17,4 @@ setup new environment.
     * On Linux/Mac: `source ./venv/bin/activate`
 1. Install packages from ``requirements.txt`` file:
 `pip install -r requirements.txt`
+1. To enable savin files with plotly pleas see this page: [plotly](https://plot.ly/python/static-image-export/). You need to install ``orca``.
