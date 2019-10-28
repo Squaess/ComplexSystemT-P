@@ -18,3 +18,20 @@ setup new environment.
 1. Install packages from ``requirements.txt`` file:
 `pip install -r requirements.txt`
 1. To enable savin files with plotly pleas see this page: [plotly](https://plot.ly/python/static-image-export/). You need to install ``orca``.
+
+## Problem sheet 1
+
+Generated graphs (the png conversion look ugly, better to use plotly and browser):
+
+Dolphin connections:
+![doplhins][dolphins]
+
+Collaboration graphs:
+![cs_graph][cs_graph]
+![phy_graph][phy_graph]
+![kft_graph][kft_graph]
+
+[dolphins]: problem_sheet1/results/exc1.png "Connections between dolphins"
+[cs_graph]: problem_sheet1/results/graph_cs.png "Graph collaboration."
+[phy_graph]: problem_sheet1/results/graph_phy.png "Graph collaboration."
+[kft_graph]: problem_sheet1/results/graph_kft.png "Graph collaboration."
