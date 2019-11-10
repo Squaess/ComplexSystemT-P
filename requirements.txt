@@ -1,7 +1,9 @@
+tqdm
 pylint
 plotly
 networkx
 ipython
+ipywidgets>=7.2
 numpy
 requests
 beautifulsoup4

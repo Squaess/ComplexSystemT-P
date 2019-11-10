@@ -18,6 +18,7 @@ setup new environment.
 1. Install packages from ``requirements.txt`` file:
 `pip install -r requirements.txt`
 1. To enable savin files with plotly pleas see this page: [plotly](https://plot.ly/python/static-image-export/). You need to install ``orca``.
+1. If you want to use jupyter lab and plotly please see this page for reference: [plotly](https://plot.ly/python/getting-started/)
 
 ## Problem sheet 1
 
