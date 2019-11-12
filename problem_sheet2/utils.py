@@ -13,6 +13,7 @@ def degree_hist(G: nx.Graph, title: str) -> None:
         G_nodes,
         x="degree",
         marginal="box",
+        histnorm='probability density'
     )
     fig.update_layout(title=title)
     fig.show()
@@ -26,6 +27,7 @@ def clust_hist(G: nx.Graph, title: str) -> None:
         G_cc,
         x="clust_coef",
         marginal="box",
+        histnorm='probability density'
     )
     fig.update_layout(title=title)
     fig.show()
@@ -45,6 +47,7 @@ def path_hist(G: nx.Graph, title, retarted=False):
             G_sp,
             x="length",
             marginal="box",
+            histnorm='probability density'
         )
         fig.update_layout(title=title)
         fig.show()
