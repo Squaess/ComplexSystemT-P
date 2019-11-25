@@ -1,3 +1,4 @@
+import tkinter
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
@@ -28,7 +29,7 @@ def plot(name, attack=False):
     plt.show()
             
 for name in task.NAMES:
-    plot(name)
+    plot(name, attack=True)
 ################################
 
             
