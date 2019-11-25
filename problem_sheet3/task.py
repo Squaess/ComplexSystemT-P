@@ -51,6 +51,12 @@ def remove_nodes(G, fraction):
         )
     # print(f"After: {G.number_of_nodes()}")
 
+def remove_high_degree_nodes(G, fraction):
+    to_remove = int(G.number_of_nodes() * fraction)
+    nn_to_remove = [i for i,_ in sorted(G.degree, key=lambda x: x[1], reverse=True)[:to_remove]]
+    G.remove_nodes_from(nn_to_remove)
+
+
 def calc_avg_deg(G):
     degs = G.degree
     N = len(degs)
@@ -65,13 +71,18 @@ def simulate(name, N, k, f, realziations=10):
     avg_prob = 0
     for _ in range(realziations):
         G = get_graph(name, N, k)
-        remove_nodes(G, f)
+        # remove_nodes(G, f)
+        remove_high_degree_nodes(G,f)
         avg_prob += calc_prob(G, N)
     return avg_prob/realziations
 
-def write_result(name, N, k, data):
-    with open(f"results_{name}_{N}_{k}", "wb+") as f:
-        pickle.dump(data, f)
+def write_result(name, N, k, data, attack=False):
+    if attack:
+        with open(f"attack_{name}_{N}_{k}", "wb+") as f:
+            pickle.dump(data, f)
+    else:
+        with open(f"results_{name}_{N}_{k}", "wb+") as f:
+            pickle.dump(data, f)
         
 def main(n):
     for name in [n]:
@@ -81,7 +92,7 @@ def main(n):
                 for f in np.linspace(0.0, 0.99, 10):
                     fs.append(simulate(name, N, k, f))
                 fs = list(map(lambda x: x/fs[0], fs))
-                write_result(name, N, k, fs)
+                write_result(name, N, k, fs, True)
 
 
 if __name__ == "__main__":

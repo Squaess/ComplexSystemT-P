@@ -6,7 +6,7 @@ import task
 
 f_range = np.linspace(0.0, 0.99, 10)
 
-def plot(name):
+def plot(name, attack=False):
     fig = plt.figure(figsize=(16,9))
     fig.suptitle(name, fontsize=16)
     pos = 131
@@ -14,7 +14,11 @@ def plot(name):
         plt.subplot(pos)
         plt.title(f"Average degree: {k}")
         for size in task.SIZE:
-            with open(f"results_{name}_{size}_{k}", "rb") as f:
+            if attack:
+                b = "attack"
+            else:
+                b = "results"
+            with open(f"{b}_{name}_{size}_{k}", "rb") as f:
                 results = pickle.load(f)
             plt.plot(f_range, results, 'o', label=f"N = {size}")
         plt.xlabel("f")
@@ -24,7 +28,7 @@ def plot(name):
     plt.show()
             
 for name in task.NAMES:
-    plot(name)
+    plot(name, True)
 ################################
 
             
