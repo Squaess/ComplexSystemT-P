@@ -3,7 +3,8 @@ import networkx as nx
 import pickle
 import numpy as np
 
-SIZE = [100, 1000, 10000]#, 100000]
+# SIZE = [100, 1000, 10000]#, 100000]
+SIZE = [100000]
 AVG_K = [5, 10, 20]
 NAMES = ["ws", "random", "ba"]
 
@@ -66,13 +67,15 @@ def calc_prob(G, n):
     bc_size = len(max(nx.connected_components(G), key=len))
     return bc_size / n
 
-def simulate(name, N, k, f, realziations=10):
+def simulate(name, N, k, f, realziations=1, attack=False):
     print(f"{name}, {N}, {k}, {f} x {realziations}")
     avg_prob = 0
     for _ in range(realziations):
         G = get_graph(name, N, k)
-        remove_nodes(G, f)
-        # remove_high_degree_nodes(G,f)
+        if attack:
+            remove_high_degree_nodes(G,f)
+        else:
+            remove_nodes(G, f)
         avg_prob += calc_prob(G, N)
     return avg_prob/realziations
 
@@ -90,7 +93,15 @@ def main(n):
             for k in AVG_K:
                 fs = list()
                 for f in np.linspace(0.0, 0.99, 10):
-                    fs.append(simulate(name, N, k, f))
+                    fs.append(simulate(name, N, k, f, attack=True))
+                fs = list(map(lambda x: x/fs[0], fs))
+                write_result(name, N, k, fs, True)
+    for name in [n]:
+        for N in SIZE:
+            for k in AVG_K:
+                fs = list()
+                for f in np.linspace(0.0, 0.99, 10):
+                    fs.append(simulate(name, N, k, f, attack=True))
                 fs = list(map(lambda x: x/fs[0], fs))
                 write_result(name, N, k, fs)
 
