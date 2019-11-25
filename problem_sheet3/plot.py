@@ -28,7 +28,7 @@ def plot(name, attack=False):
     plt.show()
             
 for name in task.NAMES:
-    plot(name, True)
+    plot(name)
 ################################
 
             

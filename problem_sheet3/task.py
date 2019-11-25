@@ -3,7 +3,7 @@ import networkx as nx
 import pickle
 import numpy as np
 
-SIZE = [1000, 10000, 100000]
+SIZE = [100, 1000, 10000]#, 100000]
 AVG_K = [5, 10, 20]
 NAMES = ["ws", "random", "ba"]
 
@@ -71,8 +71,8 @@ def simulate(name, N, k, f, realziations=10):
     avg_prob = 0
     for _ in range(realziations):
         G = get_graph(name, N, k)
-        # remove_nodes(G, f)
-        remove_high_degree_nodes(G,f)
+        remove_nodes(G, f)
+        # remove_high_degree_nodes(G,f)
         avg_prob += calc_prob(G, N)
     return avg_prob/realziations
 
@@ -92,7 +92,7 @@ def main(n):
                 for f in np.linspace(0.0, 0.99, 10):
                     fs.append(simulate(name, N, k, f))
                 fs = list(map(lambda x: x/fs[0], fs))
-                write_result(name, N, k, fs, True)
+                write_result(name, N, k, fs)
 
 
 if __name__ == "__main__":
