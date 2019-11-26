@@ -14,8 +14,8 @@ name_display = dict(
     )
 
 def plot(name, attack=False, save=False):
-    # fig = plt.figure(figsize=(9,3))
-    fig = plt.figure()
+    fig = plt.figure(figsize=(16,10))
+    #  fig = plt.figure()
     fig.suptitle(name_display.get(name) + " attack" if attack else name_display.get(name), fontsize=16)
     pos = 131
     for k in task.AVG_K:
@@ -39,9 +39,9 @@ def plot(name, attack=False, save=False):
         plt.show()
             
 for name in task.NAMES:
-    plot(name, attack=True, save=True)
+    plot(name, attack=True)#, save=True)
 for name in task.NAMES:
-    plot(name, attack=False, save=True)
+    plot(name, attack=False)#, save=True)
 ################################
 
             

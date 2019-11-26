@@ -111,20 +111,20 @@ def write_result(name, N, k, data, attack=False):
             pickle.dump(data, f)
         
 def main(n):
+    # for name in [n]:
+    #     for N in SIZE:
+    #         for k in AVG_K:
+    #             fs = list()
+    #             for f in np.linspace(0.0, 0.99, 10):
+    #                 fs.append(simulate(name, N, k, f, attack=True))
+    #             fs = list(map(lambda x: x/fs[0], fs))
+    #             write_result(name, N, k, fs, True)
     for name in [n]:
         for N in SIZE:
             for k in AVG_K:
                 fs = list()
                 for f in np.linspace(0.0, 0.99, 10):
-                    fs.append(simulate(name, N, k, f, attack=True))
-                fs = list(map(lambda x: x/fs[0], fs))
-                write_result(name, N, k, fs, True)
-    for name in [n]:
-        for N in SIZE:
-            for k in AVG_K:
-                fs = list()
-                for f in np.linspace(0.0, 0.99, 10):
-                    fs.append(simulate(name, N, k, f, attack=True))
+                    fs.append(simulate(name, N, k, f, attack=False))
                 fs = list(map(lambda x: x/fs[0], fs))
                 write_result(name, N, k, fs)
 
