@@ -7,9 +7,16 @@ import task
 
 f_range = np.linspace(0.0, 0.99, 10)
 
-def plot(name, attack=False):
-    fig = plt.figure(figsize=(16,9))
-    fig.suptitle(name, fontsize=16)
+name_display = dict(
+        random="Random graphs",
+        ws="Watts-Strogatz graph",
+        ba="Barabsi-Alber graph"
+    )
+
+def plot(name, attack=False, save=False):
+    # fig = plt.figure(figsize=(9,3))
+    fig = plt.figure()
+    fig.suptitle(name_display.get(name) + " attack" if attack else name_display.get(name), fontsize=16)
     pos = 131
     for k in task.AVG_K:
         plt.subplot(pos)
@@ -23,13 +30,18 @@ def plot(name, attack=False):
                 results = pickle.load(f)
             plt.plot(f_range, results, 'o', label=f"N = {size}")
         plt.xlabel("f")
-        plt.ylabel("prob giant component")
+        plt.ylabel("prob giant component normalized")
         plt.legend()
         pos += 1
-    plt.show()
+    if save:
+        plt.savefig(f"{'attack' if attack else 'result'}_{name}")
+    else:
+        plt.show()
             
 for name in task.NAMES:
-    plot(name, attack=True)
+    plot(name, attack=True, save=True)
+for name in task.NAMES:
+    plot(name, attack=False, save=True)
 ################################
 
             
