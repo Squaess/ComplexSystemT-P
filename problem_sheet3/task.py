@@ -3,8 +3,8 @@ import networkx as nx
 import pickle
 import numpy as np
 
-SIZE = [100, 1000, 10000, 100000]
-# SIZE = [100000]
+# SIZE = [100, 1000, 10000, 100000]
+SIZE = [100000]
 AVG_K = [5, 10, 20]
 NAMES = ["ws", "random", "ba"]
 
@@ -85,7 +85,7 @@ def calc_prob(G, n):
     bc_size = len(max(nx.connected_components(G), key=len))
     return bc_size / n
 
-def simulate(name, N, k, f, realziations=10, attack=False):
+def simulate(name, N, k, f, realziations=1, attack=False):
     """ simulate number of reealizations for given parameters
     """
     print(f"{name}, {N}, {k}, {f} x {realziations}")
