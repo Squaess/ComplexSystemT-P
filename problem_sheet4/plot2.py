@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import pickle
 import os
-import task2
+from task2 import INIT_C1
+from task2 import INIT_C2
 
 if not os.path.exists("results2"):
     raise ValueError
@@ -20,18 +21,18 @@ def dis_plot(N, p, q, c):
     plt.ylim(0,1)
     plt.show()
 
-INIT_C = task2.INIT_C1 + task2.INIT_C1
-# for i in INIT_C:
-#     dis_plot(200, 0.2, 2, i)
+INIT_C = INIT_C1 + INIT_C1
+for i in INIT_C:
+    dis_plot(200, 0.2, 2, i)
 
-# for i in INIT_C:
-#     dis_plot(200, 0.4, 2, i)
+for i in INIT_C:
+    dis_plot(200, 0.4, 2, i)
 
-# for i in INIT_C:
-#     dis_plot(100000, 0.2, 2, i)
+for i in INIT_C:
+    dis_plot(100000, 0.2, 2, i)
 
-# for i in INIT_C:
-#     dis_plot(100000, 0.4, 2, i)
+for i in INIT_C:
+    dis_plot(100000, 0.4, 2, i)
 
 # for i in INIT_C:
 #     dis_plot(1000, 0.2, 2, i)
@@ -39,8 +40,8 @@ INIT_C = task2.INIT_C1 + task2.INIT_C1
 # for i in INIT_C:
 #     dis_plot(1000, 0.4, 2, i)
 
-for i in INIT_C:
-    dis_plot(500, 0.2, 2, i)
+# for i in INIT_C:
+#     dis_plot(500, 0.2, 2, i)
 
-for i in INIT_C:
-    dis_plot(500, 0.4, 2, i)
+# for i in INIT_C:
+#     dis_plot(500, 0.4, 2, i)

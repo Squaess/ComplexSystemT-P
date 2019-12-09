@@ -27,7 +27,7 @@ function agent_move(
         if Random.rand() < 0.5
             states[node] = states[node] *(-1)
         end
-    else
+    else:write
         if length(neighbours) < q
             return
         end
@@ -91,9 +91,10 @@ println("Generating graph")
 G = erdos_renyi(N, avg_d/(N-1))
 
 function main(graph)
-    results = zeros(30)
+    results = zeros(60)
     i = 0
-    for p in range(0,stop=1, length=30)
+    # for p in range(0,stop=0.4, length=60)   # for q = 2
+    for p in range(0,stop=0.11, length=60)    # for q = 8
         i += 1
         println("Strarting simulation for i=$i, c=$c, q=$q")
         states = gen_states(N, c)
@@ -106,6 +107,7 @@ function main(graph)
             states
         )
         results[i] = calc_con(states, N)
+        println("Result $(results[i])")
     end
     save_results(results, q, c)
 end
