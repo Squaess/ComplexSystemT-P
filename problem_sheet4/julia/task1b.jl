@@ -7,7 +7,7 @@ using StatsBase
 N = 100000
 avg_d = 14
 
-MCS_STEPS = 1
+MCS_STEPS = 10000
 
 c = parse(Float64, ARGS[1])
 println("Con c(0)=$c")
@@ -83,7 +83,7 @@ end
 function save_results(data, q, c)
     println("Saving results")
     open("results_$(q)_$(c).txt", "w") do f
-        write(f, data)
+        write(f, string(data))
     end
 end
 
@@ -91,11 +91,11 @@ println("Generating graph")
 G = erdos_renyi(N, avg_d/(N-1))
 
 function main(graph)
-    results = zeros(10)
+    results = zeros(30)
     i = 0
-    for p in range(0,stop=1, length=10)
+    for p in range(0,stop=1, length=30)
         i += 1
-        println("Strarting simulation for p=$p, c=$c, q=$q")
+        println("Strarting simulation for i=$i, c=$c, q=$q")
         states = gen_states(N, c)
         simulate(
             graph,
@@ -111,3 +111,8 @@ function main(graph)
 end
 
 main(G)
+
+# @async main(G, 1.0, 2)
+# @async main(G, 0.5, 2)
+# @async main(G, 1.0, 8)
+# @async main(G, 0.5, 8)
