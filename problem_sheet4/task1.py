@@ -113,5 +113,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         raise ValueError("We need just one parameter for the name.")
     else:
-        main(sys.argv[1], "cc")
+        # main(sys.argv[1], "cc")
         main(sys.argv[1], "bc")

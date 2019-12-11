@@ -21,7 +21,7 @@ def dis_plot(N, p, q, c):
     plt.ylim(0,1)
     plt.show()
 
-INIT_C = INIT_C1 + INIT_C1
+INIT_C = INIT_C1 + INIT_C2
 for i in INIT_C:
     dis_plot(200, 0.2, 2, i)
 
