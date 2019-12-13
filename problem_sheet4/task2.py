@@ -1,3 +1,7 @@
+"""
+This code was used to produce task2 a plots.
+"""
+
 import sys
 import matplotlib.pyplot as plt
 import os
@@ -27,6 +31,14 @@ INIT_C2 = [0.7, 0.6]
 
 @njit
 def agent_move(node, p, q, states, neighbours):
+    """ Make a move for a one agent
+    Args:
+        node (int): id of the node that we're concerning
+        p (float) probability of independence
+        q (int): how many neighbours we are choosing
+        states: array of states for all nodes
+        neighbours: array of neighbours for the node
+    """
     if np.random.random_sample() < p:
         if np.random.random_sample() < 0.5:
             states[node] = states[node]*(-1)
@@ -44,6 +56,8 @@ def agent_move(node, p, q, states, neighbours):
 
 @njit
 def mcs(adj_l, N, p, q, states):
+    """ Perform one Monte carlo step
+    """
     for _ in range(N):
         # choose random node
         node = np.random.randint(0, N)
@@ -53,6 +67,8 @@ def mcs(adj_l, N, p, q, states):
 
 @njit
 def simulate(adj_l, states, N, p, q, mcs_steps):
+    """ Perform mcs_steps MONTE CARLO STEP
+    """
     result = List()
     for _ in range(mcs_steps):
         mcs(adj_l, N, p, q, states)
@@ -61,6 +77,9 @@ def simulate(adj_l, states, N, p, q, mcs_steps):
 
 @njit
 def gen_states(N, c):
+    """  Generates inistial states for the graph with
+    concentration of up spins 'c'
+    """
     rang = np.array([x for x in range(N)])
     states = np.array([-1 for x in rang])
     for x in np.random.choice(rang, int(c * N), replace=False):
@@ -69,6 +88,9 @@ def gen_states(N, c):
 
 @njit
 def calc_conc(states, N):
+    """ Calculate concentration of up spins from the
+    states array
+    """
     return (1/(2*N)) * states.sum() + (1/2)
 
 def save_results(N, p, q, c, result):

@@ -1,3 +1,6 @@
+""" This script wasn't working fine for the task2 b.
+It's working but very bad performance, so i switched to julia.
+"""
 import sys
 import matplotlib.pyplot as plt
 import os
@@ -5,8 +8,8 @@ import logging
 import pickle
 import numpy as np
 import numba
-# from numba import jit, njit
-# from numba.typed import List
+from numba import jit, njit
+from numba.typed import List
 from igraph import Graph
 
 logger = logging.getLogger(__name__)
@@ -21,7 +24,7 @@ logger.addHandler(ch)
 
 MCS_STEPS = 1000
 
-# @jit(nopython=False)
+@jit(nopython=False)
 def agent_move(node, p, q, states, neighbours):
     if np.random.random_sample() < p:
         if np.random.random_sample() < 0.5:
@@ -38,7 +41,7 @@ def agent_move(node, p, q, states, neighbours):
         elif S == -q:
             states[node] = -1
 
-# @jit(nopython=False)
+@jit(nopython=False)
 def mcs(adj_l, N, p, q, states):
     for _ in range(N):
         # choose random node
@@ -47,13 +50,13 @@ def mcs(adj_l, N, p, q, states):
         agent_move(node, p, q, states, neigh)
     # return calc_conc(states, N)
 
-# @jit(nopython=False)
+@jit(nopython=False)
 def simulate(adj_l, states, N, p, q, mcs_steps):
     for _ in range(mcs_steps):
         mcs(adj_l, N, p, q, states)
     return calc_conc(states, N)
 
-# @jit(nopython=False)
+@jit(nopython=False)
 def gen_states(N, c):
     rang = np.array([x for x in range(N)])
     states = np.array([-1 for x in rang])
@@ -61,7 +64,7 @@ def gen_states(N, c):
         states[x] = 1
     return states
 
-# @jit(nopython=False)
+@jit(nopython=False)
 def calc_conc(states, N):
     return (1/(2*N)) * states.sum() + (1/2)
 

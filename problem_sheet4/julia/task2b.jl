@@ -1,3 +1,6 @@
+# This file is very the same as the python script
+# It only differs in syntax.
+
 using Random
 Random.seed!(2019); # make sure this tutorial is reproducible
 
@@ -24,14 +27,18 @@ function agent_move(
     neighbours::Array
     )
     if Random.rand() < p
+        # If p then with prob 1/2 = 1 and with 1/2 = -1
         if Random.rand() < 0.5
             states[node] = states[node] *(-1)
         end
-    else:write
+    else
+        # Check if we can select q neighbors
         if length(neighbours) < q
             return
         end
+        # Get randomly q neighbours
         voters = sample(neighbours, q, replace=false)
+        # Check if we should change the state
         S = 0
         for v in voters
             S += states[v]
@@ -69,6 +76,7 @@ function simulate(graph, N, p, q, n_mcs, states)
 end
 
 function gen_states(N::Int, c::Float64)::Array
+    # function that generates initial states
     states = fill(-1, N)
     for i in sample(1:N, Int(c*N), replace=false)
         states[i] = 1

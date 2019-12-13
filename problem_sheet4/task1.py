@@ -1,3 +1,7 @@
+"""
+Most of the code is the same as in previos list, there's
+just a difference in removing the nodes.
+"""
 import sys
 import os
 import pickle
@@ -58,12 +62,16 @@ def get_graph(name: str, N, k) -> nx.Graph:
         return nx.fast_gnp_random_graph(N,p)
 
 def remove_cc(G: nx.Graph, n: int, f: float):
+    """ Remove using closeness_centrality
+    """
     to_remove = int(n * f)
     cc = nx.algorithms.closeness_centrality(G)
     nn_remove = [i for i,_ in sorted(cc.items(), key=lambda x: x[1], reverse=True)[:to_remove]]
     G.remove_nodes_from(nn_remove)
 
 def remove_bc(G: nx.Graph, n: int, f: float):
+    """ Remove usgin betweenness_centrality
+    """
     to_remove = int(n * f)
     cc = nx.algorithms.betweenness_centrality(G)
     nn_remove = [i for i,_ in sorted(cc.items(), key=lambda x: x[1], reverse=True)[:to_remove]]
